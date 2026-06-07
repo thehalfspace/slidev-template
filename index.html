@@ -1,0 +1,19 @@
+<head>
+  <script>
+    // GitHub Pages SPA redirect restore.
+    // When 404.html redirects here with ?p=..., this script restores the original path
+    // before the Vue router initialises, so the correct slide is loaded directly.
+    (function() {
+      var search = window.location.search;
+      if (search) {
+        var p = search.slice(1).split('&p=')[1];
+        if (p !== undefined) {
+          window.history.replaceState(
+            null, null,
+            window.location.pathname + decodeURIComponent(p).replace(/~and~/g, '&') + window.location.hash
+          );
+        }
+      }
+    })();
+  </script>
+</head>
