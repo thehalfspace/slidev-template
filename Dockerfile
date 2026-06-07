@@ -18,7 +18,7 @@ COPY . .
 
 # Build the static SPA into /app/dist.
 # If you deploy to a GitHub Pages sub-path (e.g. /my-repo/), pass it here:
-#   RUN npm run build -- --base /my-repo/
+RUN npm run build -- --base /slidev-template/
 # For a root deployment or custom domain, leave it as-is:
 RUN npm run build
 

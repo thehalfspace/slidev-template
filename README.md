@@ -13,5 +13,3 @@ Learn more about Slidev at the [documentation](https://sli.dev/).
 
 ## My workflow:
 - Clone this repo into your project folder. 
-- Delete the git info from this repo: `rm -rf .git`
-- Make slides relevant to your project. 
