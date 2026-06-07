@@ -22,6 +22,9 @@ transition: slide-left
 comark: true
 # duration of the presentation
 duration: 35min
+# Use hash-based routing so GitHub Pages doesn't 404 on direct slide URLs.
+# With 'hash', slides are at /#/1, /#/2 etc. instead of /1, /2.
+routerMode: hash
 ---
 
 # Welcome to Slidev

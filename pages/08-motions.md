@@ -14,61 +14,6 @@ Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), t
 </div>
 ```
 
-<!--
-v-motion DIRECTIVE — KEY STATES
----------------------------------
-Apply v-motion to any element to animate it between named states.
-States are bound with Vue's colon-prefix syntax (e.g. :initial, :enter, :leave).
-
-  :initial   → the element's state BEFORE it enters the viewport / before the slide is shown.
-               Use this to set the starting position of an enter animation.
-
-  :enter     → the state the element transitions TO when it first becomes visible.
-               Typically your "resting" or "default" visible state.
-
-  :leave     → the state when the element is removed / the slide advances away.
-               Use this for exit animations.
-
-  :click-N   → the state the element transitions to when click step N is reached.
-               Example:  :click-3="{ x: 80 }"  → slides to x=80 on click 3
-               You can chain multiple: :click-1, :click-2, :click-3 ...
-
-  :visible   → same as :enter but only triggers when the element enters the browser viewport
-               (useful for scroll-based reveals outside Slidev)
-
-ANIMATABLE PROPERTIES
------------------------
-  Position:   x, y          (pixels, relative to natural position)
-  Scale:      scale         (1 = normal, 0.5 = half size, 2 = double)
-  Rotation:   rotate        (degrees)
-  Opacity:    opacity       (0–1)
-  All standard CSS transforms are supported.
-
-TRANSITION CONFIG (inside any state object)
---------------------------------------------
-  transition: {
-    type: 'spring'   | 'tween'   (spring = bouncy, tween = linear/eased)
-    duration: 500                (ms, for tween)
-    delay: 1000                  (ms before animation starts)
-    damping: 10                  (spring: higher = less oscillation)
-    stiffness: 20                (spring: higher = faster snap)
-    mass: 2                      (spring: higher = heavier/slower)
-  }
-
-USING A NAMED FINAL STATE (see script setup below)
----------------------------------------------------
-Instead of repeating the same object in :enter, define it once in script setup
-and reference it by variable name:
-  :enter="final"   where final is a reactive object defined in script setup
-
-EXAMPLE PATTERN
----------------
-  Add v-motion to any element with :initial and :enter bindings:
-    v-motion
-    :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-    :enter="{ x: 0, y: 0, rotate: 0, scale: 1, transition: { type: 'spring', damping: 10 } }"
--->
-
 <div class="w-60 relative">
   <div class="relative w-40 h-40">
     <img
@@ -106,7 +51,7 @@ EXAMPLE PATTERN
   </div>
 </div>
 
-<!-- vue script setup can be used directly in markdown — scoped to this slide only -->
+<!-- script setup is scoped to this slide only -->
 <script setup lang="ts">
 const final = {
   x: 0,
@@ -130,3 +75,22 @@ const final = {
 [Learn more](https://sli.dev/guide/animations.html#motion)
 
 </div>
+
+<!--
+v-motion STATES (bind with colon prefix):
+  :initial  - state before the slide is shown (starting position of enter animation)
+  :enter    - state the element transitions to when it becomes visible
+  :leave    - state when the slide advances away (exit animation)
+  :click-N  - state on click step N (e.g. :click-3 triggers on click 3)
+  :visible  - like :enter but triggers on viewport entry (scroll-based)
+
+ANIMATABLE PROPERTIES: x, y (pixels), scale (1=normal), rotate (degrees), opacity (0-1)
+
+TRANSITION CONFIG (inside any state object):
+  transition: { type: 'spring', damping: 10, stiffness: 20, mass: 2 }
+  transition: { type: 'tween', duration: 500, delay: 1000 }
+  spring = bouncy; tween = linear/eased
+
+NAMED STATE: define once in script setup and reference by variable name.
+  :enter="final"  where final is a plain object defined in script setup.
+-->

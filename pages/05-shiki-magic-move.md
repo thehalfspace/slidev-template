@@ -8,53 +8,6 @@ Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev sup
 
 Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
 
-<!--
-SHIKI MAGIC MOVE — HOW IT WORKS
----------------------------------
-Wrap two or more fenced code blocks inside ````md magic-move ... ```` (4 backticks).
-When you advance clicks, Slidev smoothly morphs each token from one block to the next.
-
-BASIC SYNTAX
-  ````md magic-move
-  ```ts
-  // version A
-  ```
-
-  ```ts
-  // version B — tokens shared with A will animate; new tokens fade in
-  ```
-  ````
-
-OPTIONS (set on the opening fence)
-  ````md magic-move {lines: true}
-    lines: true   → show line numbers in every step
-    lines: false  → hide line numbers (default)
-
-PER-STEP LINE HIGHLIGHTING
-  Each inner code block can carry its own highlight spec, exactly like a normal code block:
-    ```ts {1-3}      ← highlight lines 1-3 on this step
-    ```ts {*|2|4-5}  ← animate highlights within this step across sub-clicks
-
-LANGUAGE MIXING
-  You can change language between steps — Shiki re-tokenizes each block independently:
-    ```ts
-    const x: number = 1
-    ```
-    ```js
-    const x = 1
-    ```
-
-NON-CODE BLOCKS ARE IGNORED
-  Any markdown text between code blocks (like "Non-code blocks are ignored." below)
-  is skipped by magic-move — only fenced code blocks are animated.
-
-TIPS
-  - Tokens that are textually identical across steps get matched and animated.
-  - Add/remove tokens to see them fade in/out.
-  - You can have as many steps as you like — each ``` block = one click step.
-  - Works best when consecutive steps share most of their code (refactoring, incremental adds, etc.).
--->
-
 ````md magic-move {lines: true}
 ```ts {*|2|*}
 // step 1
@@ -118,3 +71,25 @@ const author = {
 </script>
 ```
 ````
+
+<!--
+SHIKI MAGIC MOVE
+  Wrap 2+ fenced code blocks in ````md magic-move ... ```` (4 backticks).
+  Each code block = one click step. Tokens shared between steps animate smoothly.
+
+OPTIONS (on opening fence):
+  {lines: true}  - show line numbers in every step
+
+PER-STEP HIGHLIGHTING (on each inner block):
+  ```ts {1-3}      - highlight lines 1-3 on this step
+  ```ts {*|2|4-5}  - sub-click highlights within this step
+
+LANGUAGE MIXING: you can change language between steps, Shiki re-tokenizes each block.
+
+NON-CODE BLOCKS: any markdown text between code blocks is skipped (not animated).
+
+TIPS:
+  - Identical tokens across steps get matched and animated.
+  - Works best when steps share most of the code (refactoring, incremental additions).
+  - As many steps as you like — each fenced block = one click.
+-->

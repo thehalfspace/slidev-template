@@ -2,48 +2,6 @@
 
 You can add `v-click` to elements to add a click animation.
 
-<!--
-v-click DIRECTIVE
-------------------
-Add v-click to any HTML element or Vue component to make it appear on the next click/keypress.
-
-  <div v-click>Appears on click 1</div>
-  <div v-click>Appears on click 2</div>   ← each v-click increments the counter
-
-Explicit click index (jump to a specific step):
-  <div v-click="3">Appears on click 3</div>
-  <div v-click="[2, 4]">Visible only between clicks 2 and 4 (hidden after)</div>
-
-v-after — appear at the SAME step as the preceding v-click:
-  <img v-click />
-  <p v-after>I show up together with the image above</p>
-
-MODIFIERS — control the enter animation:
-  v-click.up        → slides in from the bottom
-  v-click.fade-in   → fades in (stays visible)
-  v-click.fade      → dims to 50% opacity (does not disappear)
-  v-click.none      → appears instantly, no CSS transition
-
-Modifiers can be composed:
-  v-click.fade.right.scale  → multiple effects at once
-
-HIDE ON CLICK (v-click-hide):
-  <div v-click-hide>Visible by default, disappears on click</div>
-  <div v-click-hide="2">Disappears specifically on click 2</div>
-
-v-mark DIRECTIVE — inline annotations (powered by Rough Notation)
-------------------------------------------------------------------
-  <span v-mark.red="3">highlighted text</span>
-
-  Annotation types:  underline | box | circle | highlight | strike-through | crossed-off
-  Color:             .red | .blue | .green | .orange | .yellow | any CSS color after a dot
-
-  Examples:
-    <span v-mark.underline.orange="1">underlined on click 1</span>
-    <span v-mark.circle.blue>circled on next click</span>
-    <span v-mark.box.red="[2,4]">boxed between clicks 2-4</span>
--->
-
 <div v-click>
 
 This shows up when you press <kbd>space</kbd> or <kbd>right</kbd>, or click outside the slide on the right.
@@ -99,3 +57,22 @@ also allows you to add
 [Learn more](https://sli.dev/guide/animations#click-animation)
 
 </div>
+
+<!--
+v-click: element appears on the next click.
+  v-click="3"     - appears on click 3 specifically
+  v-click="[2,4]" - visible only between clicks 2 and 4
+
+v-after: appears at the SAME step as the nearest preceding v-click.
+
+v-click-hide: visible by default, disappears on click.
+  v-click-hide="2" - disappears on click 2 specifically.
+
+MODIFIERS: v-click.up | .fade-in | .fade | .none — can be composed: v-click.fade.right.scale
+
+v-mark — inline annotations via Rough Notation:
+  Types:  underline | box | circle | highlight | strike-through | crossed-off
+  Color:  .red | .blue | .green | .orange | .yellow
+  Index:  v-mark.red="3" - annotates on click 3
+  Range:  v-mark.box.red="[2,4]" - visible between clicks 2 and 4
+-->
