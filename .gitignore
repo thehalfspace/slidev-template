@@ -20,3 +20,6 @@ slides-export*
 .venv
 .env
 .env.*
+
+# Metadata folders
+assets/
