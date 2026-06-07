@@ -17,10 +17,9 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Build the static SPA into /app/dist.
-# If you deploy to a GitHub Pages sub-path (e.g. /my-repo/), pass it here:
+# Sub-path needed because the repo is served at /slidev-template/ on GitHub Pages.
+# If you ever use a custom domain at the root, change this to just: npm run build
 RUN npm run build -- --base /slidev-template/
-# For a root deployment or custom domain, leave it as-is:
-RUN npm run build
 
 # ─── Stage 2: Serve ───────────────────────────────────────────────────────────
 # Copies only the built dist/ folder into a minimal nginx image.
