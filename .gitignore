@@ -1,0 +1,22 @@
+node_modules
+.DS_Store
+dist
+*.local
+.vite-inspect
+.remote-assets
+components.d.ts
+
+# Slidev export output
+*.pdf
+*.pptx
+slides-export*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Environment
+.venv
+.env
+.env.*

@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Runs on every push to main/master
+  push:
+    branches: [main, master]
+  # Also allows manual trigger from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only allow one deployment at a time; don't cancel in-progress runs
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Build the Dockerfile's `builder` stage only.
+      # We don't need the nginx stage here — we just want dist/.
+      - name: Build dist/ using Dockerfile
+        run: |
+          docker build --target builder --tag slidev-builder .
+          # Copy /app/dist out of the container into the runner's workspace
+          docker create --name slidev-extract slidev-builder
+          docker cp slidev-extract:/app/dist ./dist
+          docker rm slidev-extract
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload dist/ as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
