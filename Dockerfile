@@ -17,9 +17,11 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Build the static SPA into /app/dist.
-# Sub-path needed because the repo is served at /slidev-template/ on GitHub Pages.
-# If you ever use a custom domain at the root, change this to just: npm run build
-RUN npm run build -- --base /slidev-template/
+# Note: --base is NOT passed here because routerMode is 'hash' in slides.md.
+# With hash routing, all navigation happens after the # so the sub-path is
+# handled correctly by GitHub Pages without needing --base on the build.
+# If you ever switch back to history mode, add: --base /slidev-template/
+RUN npm run build
 
 # ─── Stage 2: Serve ───────────────────────────────────────────────────────────
 # Copies only the built dist/ folder into a minimal nginx image.
